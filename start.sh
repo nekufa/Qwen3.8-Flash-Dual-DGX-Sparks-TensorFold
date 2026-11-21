@@ -73,6 +73,7 @@ if [[ "$THINKING" == 1 ]]; then SERVE_ARGS+=(--thinking); else SERVE_ARGS+=(--no
 [[ "$DRAFTS" == 1 ]] || SERVE_ARGS+=(--no-drafts)
 [[ "$KV_DTYPE" =~ ^(bf16|fp8)$ ]] || die "KV_DTYPE is bf16 or fp8, not $KV_DTYPE"
 SERVE_ARGS+=(--kv-dtype "$KV_DTYPE")
+SERVE_ARGS+=(--prompt-cache-gib "${PROMPT_CACHE_GIB:-16}")
 [[ "$MAX_VIDEOS" =~ ^[0-9]+$ ]] || die "MAX_VIDEOS is a count, not $MAX_VIDEOS"
 if [[ "$VISION" == 1 ]]; then
   SERVE_ARGS+=(--vision --vision-max-images "$TENSORFOLD_MAX_IMAGES" --vision-max-videos "$MAX_VIDEOS"
